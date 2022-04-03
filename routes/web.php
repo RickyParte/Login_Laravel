@@ -26,6 +26,4 @@ Route::view('dashboard','dashboard');
 
 Route::post('/login',[LoginController::class,'login']);
 Route::get('/logout',[LoginController::class,'logout']);
-Route::get('/admin',function(){
-    return view('admin');
-});
+
