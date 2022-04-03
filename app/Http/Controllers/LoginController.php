@@ -27,7 +27,7 @@ class LoginController extends Controller
                 return redirect('/dashboard');
             }
             else{
-                return redirect('/');
+                return redirect('/')->with("error","Please Enter Correct Credentials!");
             }
         }
 
@@ -38,6 +38,6 @@ class LoginController extends Controller
         {
             session()->pull('user', null);
         }
-        return redirect('/');
+        return redirect('/')->with("message","Logout Successfully!!");
     }
 }

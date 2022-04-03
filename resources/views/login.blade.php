@@ -23,6 +23,13 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
+    @if (Session::has('message'))
+    <p class="text-center text-success"><b>{{ session()->get('message') }}</b></p>
+    @endif
+    @if (Session::has('error'))
+    <p class="text-center text-danger"><b>{{ session()->get('error') }}</b></p>
+    @endif
+
       <p class="login-box-msg">Login to View Your Dashboard</p>
 
       <form action="/login" method="post">
@@ -76,5 +83,6 @@
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
 </body>
 </html>
