@@ -15,25 +15,56 @@ class LoginController extends Controller
         // Retrieve Data From Table and check where condition
         $check=DB::select('select * from users where email = ?',[$request->email]);
 
-        // Check which user has same password as inputed password
-        foreach($check as $c)
+
+        if(count($check)>0)
         {
-            $pass=$c->pass;
-            $sessionUser=$c->name;
-            // if password match then redirected to dashboard else give error
-            if(Hash::check($request->password, $pass))
+            // Check which user has same password as inputed password
+            foreach($check as $c)
             {
-                $request->session()->put('user', $sessionUser);
-                return redirect('/dashboard');
+                $password=$c->password;
+                $sessionUser=$c->name;
+                // if password match then redirected to dashboard else give error
+                if(Hash::check($request->password, $password))
+                {
+                    $request->session()->put('user', $sessionUser);
+                    return redirect('/dashboard');
+                }
+                else{
+                    return redirect('/')->with("error","Please Enter Correct Credentials!");
+                }
             }
-            else{
-                return redirect('/')->with("error","Please Enter Correct Credentials!");
-            }
+        }
+        else{
+            return redirect('/')->with("error","Please Enter Correct Credentials!");
+        }
+
+
+    }
+
+    // Second Logic
+    function loginUser(Request $request)
+    {
+        // get user where email same as inputed email
+        $getCredential=User::where('email',$request->email)->first();
+
+        // user is not null and password same as database password then login otherwise error
+        if($getCredential && Hash::check($request->password, $getCredential->password))
+        {
+            $sessionUser=$getCredential->name;
+            $request->session()->put('user', $sessionUser);
+            return redirect('/dashboard');
+        }
+        else
+        {
+            return redirect('/')->with("error","Please Enter Correct Credentials!");
         }
 
     }
+
+    //Logout Function
     function logout()
     {
+        // User has session then reset to null and redirect
         if(session()->has('user'))
         {
             session()->pull('user', null);

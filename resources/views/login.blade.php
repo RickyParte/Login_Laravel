@@ -68,7 +68,7 @@
       </form>
 
 
-      <p class="mb-1">
+      <p class="mb-1 text-center">
         <a href="forgot-password.html">I forgot my password</a>
       </p>
     </div>

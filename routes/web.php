@@ -21,9 +21,12 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 });
+
 Route::view('dashboard','dashboard');
 
 
 Route::post('/login',[LoginController::class,'login']);
 Route::get('/logout',[LoginController::class,'logout']);
+
+Route::post('/loginUser',[LoginController::class,'loginUser']);
 
