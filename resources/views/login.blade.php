@@ -34,7 +34,7 @@
 
       <form action="/login" method="post">
         @csrf
-        <div class="input-group mb-3">
+        <div class="input-group">
           <input type="email" class="form-control" name="email" placeholder="Email">
           <div class="input-group-append">
             <div class="input-group-text">
@@ -42,7 +42,17 @@
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
+        <div class="mb-2">
+            <span class="text-danger">
+                <b>
+                    @error('email')
+                        {{ $message }}
+                    @enderror
+                </b>
+            </span>
+        </div>
+
+        <div class="input-group mt-3">
           <input type="password" class="form-control" name="password" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
@@ -50,6 +60,16 @@
             </div>
           </div>
         </div>
+        <div class="mb-2">
+            <span class="text-danger mb-2">
+                <b>
+                    @error('password')
+                        {{ $message }}
+                    @enderror
+                </b>
+            </span>
+        </div>
+
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
